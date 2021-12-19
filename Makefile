@@ -10,7 +10,10 @@ RM = rm -rf
 
 AR = ar rcs
 
-SRCS = ft_printf.c
+SRCS = ft_printf.c \
+	   ft_printf_utils1.c \
+	   ft_printf_utils2.c \
+	   ft_printf_utils3.c
 
 OUT = $(SRCS:.c=.o)
 
