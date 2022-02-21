@@ -1,27 +1,36 @@
-NAME = libftprintf.a
+
+NAME = push_swap.a
 
 CC = gcc
 
 INCLUDES = ../include
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 
 RM = rm -rf
 
 AR = ar rcs
 
-SRCS = ft_printf.c \
-	   ft_printf_utils1.c \
-	   ft_printf_utils2.c \
-	   ft_printf_utils3.c
+SRCS = aurele_sort_utils_2.c	\
+       aurele_sort_utils.c	\
+       ft_list.c	\
+       ft_lstinfo.c	\
+       push.c	\
+       push_swap.c	\
+       push_swap_utils.c	\
+       rotate2.c	\
+       rotate.c	\
+       swap.c
+
 
 OUT = $(SRCS:.c=.o)
 
 OUTB = $(SRCSB:.c=.o)
 
 $(NAME): $(OUT)
-		$(CC) $(FLAGS) -c $(SRCS)
+		$(CC) $(FLAGS) -c $(SRCS) 
 		$(AR) $(NAME) $(OUT)
+		gcc -o push_swap push_swap.a
 
 bonus: $(OUT) $(OUTB)
 		$(CC) $(FLAGS) -c $(SRCS) $(SRCSB)
@@ -38,4 +47,3 @@ fclean: clean
 re:		fclean all
 
 .PHONY: all clean fclean re bonus
-
