@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
-int	ft_flagclean(int c)
-{
+int	ft_flagclean(int c) {
 	if (c < 0)
 		return (0);
 	return (c);
 }
 
-int	ft_strlen(const char *str)
-{
+int	ft_strlen(const char *str) {
 	int	i;
 
 	i = 0;
@@ -29,12 +27,11 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-void	ft_hexa(size_t nbr, char maj)
-{
+void	ft_hexa(size_t nbr, char maj) {
 	char	c;
 
 	c = (char)nbr;
-	if (nbr <= 9 && nbr >= 0)
+	if (nbr <= 9)
 		c = c + '0';
 	else if (maj != 'X')
 		c = c - 10 + 'a';
@@ -43,25 +40,21 @@ void	ft_hexa(size_t nbr, char maj)
 	write(1, &c, 1);
 }
 
-void	ft_putbase(size_t nbr, size_t base, char c)
-{
+void	ft_putbase(size_t nbr, size_t base, char c) {
 	if (nbr > base - 1)
 		ft_putbase(nbr / base, base, c);
 	nbr = nbr % base;
 	if (base == 16)
 		ft_hexa(nbr, c);
-	else if (base == 10)
-	{
+	else if (base == 10) {
 		nbr = nbr % 10 + '0';
 		write (1, &nbr, 1);
 	}
 }
 
-t_flag	ft_padding(t_flag flag, int i)
-{
+t_flag	ft_padding(t_flag flag, int i) {
 	while (flag.nbr-- > 0 && (((i == 1 || i == 2) && flag.tiret == 1)
-			|| ((i == 0 || i == 2) && flag.tiret == 0)))
-	{
+			|| ((i == 0 || i == 2) && flag.tiret == 0))) {
 		if (flag.zero == 1 && flag.tiret == 0 && flag.point == 0)
 			write(1, "0", 1);
 		else

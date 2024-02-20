@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
-int	ft_iintmin(int ret, t_flag flag)
-{
+int	ft_iintmin(int ret, t_flag flag) {
 	flag.dotnbr = flag.dotnbr - 10;
 	flag.nbr = flag.nbr - 11 - ft_flagclean(flag.dotnbr);
 	ft_padding2(flag, 0, 1);
@@ -22,8 +21,7 @@ int	ft_iintmin(int ret, t_flag flag)
 	return (ret + 11 + ft_flagclean(flag.nbr) + ft_flagclean(flag.dotnbr));
 }
 
-int	ft_i(int nb, int ret, t_flag flag)
-{
+int	ft_i(int nb, int ret, t_flag flag) {
 	int	nbr;
 
 	nbr = nb;
@@ -31,15 +29,13 @@ int	ft_i(int nb, int ret, t_flag flag)
 		return (ft_iintmin(ret, flag));
 	if (nb == 0)
 		return (ft_izero(ret, flag));
-	if (flag.plus == 1 || flag.espace == 1 || nb < 0)
-	{
+	if (flag.plus == 1 || flag.espace == 1 || nb < 0) {
 		ret++;
 		flag.nbr--;
 	}
 	if (nb < 0)
 		nb = -nb;
-	while (nb > 0)
-	{
+	while (nb > 0) {
 		flag.nbr--;
 		flag.dotnbr--;
 		nb = nb / 10;
@@ -50,10 +46,8 @@ int	ft_i(int nb, int ret, t_flag flag)
 	return (ret + ft_flagclean(flag.nbr) + ft_flagclean(flag.dotnbr));
 }
 
-int	ft_null(t_flag flag)
-{
-	if (flag.point == 1)
-	{
+int	ft_null(t_flag flag) {
+	if (flag.point == 1) {
 		if (flag.dotnbr > 6)
 			flag.dotnbr = 6;
 		return (write(1, "(null)", flag.dotnbr));
@@ -68,8 +62,7 @@ int	ft_null(t_flag flag)
 		return (6 + flag.nbr);
 }
 
-int	ft_s(char *str, int ret, t_flag flag)
-{
+int	ft_s(char *str, int ret, t_flag flag) {
 	if (!str)
 		return (ret + ft_null(flag));
 	if (flag.point == 0 || ft_strlen(str) < flag.dotnbr)
@@ -84,19 +77,16 @@ int	ft_s(char *str, int ret, t_flag flag)
 	return (ret + flag.dotnbr + ft_flagclean(flag.nbr));
 }
 
-int	ft_p(unsigned long int addr, int ret, t_flag flag)
-{
+int	ft_p(unsigned long int addr, int ret, t_flag flag) {
 	unsigned long int	mem;
 
 	mem = addr;
 	flag.nbr = flag.nbr - 2;
-	if (addr == 0)
-	{
+	if (addr == 0) {
 		ret++;
 		flag.nbr--;
 	}
-	while (addr > 0)
-	{
+	while (addr > 0) {
 		addr = addr / 16;
 		flag.nbr--;
 		ret++;

@@ -10,15 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include <stdarg.h>
-#include <stdio.h>
+#include "../include/ft_printf.h"
 
-int	ft_conversion(t_flag flag, va_list args, char str, int ret)
-{
-	int		i;
-
-	i = 0;
+int	ft_conversion(t_flag flag, va_list args, char str, int ret) {
 	flag.c = str;
 	if (str == 'c')
 		ret = ft_c((char)va_arg(args, int), ret, flag);
@@ -39,8 +33,7 @@ int	ft_conversion(t_flag flag, va_list args, char str, int ret)
 	return (ret);
 }
 
-t_flag	ft_setzeroflag(t_flag flag)
-{
+t_flag	ft_setzeroflag(t_flag flag) {
 	flag.tiret = 0;
 	flag.zero = 0;
 	flag.point = 0;
@@ -53,13 +46,11 @@ t_flag	ft_setzeroflag(t_flag flag)
 	return (flag);
 }
 
-t_flag	ft_setflagnbr(t_flag flag, const char *c)
-{
+t_flag	ft_setflagnbr(t_flag flag, const char *c) {
 	int	i;
 
 	i = 0;
-	if (*c == '0' && !(*(c - 1) <= '9' && *(c - 1) >= '0'))
-	{
+	if (*c == '0' && !(*(c - 1) <= '9' && *(c - 1) >= '0')) {
 		flag.zero = 1;
 		return (flag);
 	}
@@ -72,8 +63,7 @@ t_flag	ft_setflagnbr(t_flag flag, const char *c)
 	return (flag);
 }
 
-t_flag	ft_setflag(t_flag flag, const char *c)
-{
+t_flag	ft_setflag(t_flag flag, const char *c) {
 	if (*c == ' ')
 		flag.espace = 1;
 	if (*c == '+')
@@ -89,19 +79,16 @@ t_flag	ft_setflag(t_flag flag, const char *c)
 	return (flag);
 }
 
-int	ft_printf(const char *str, ...)
-{
+int	ft_printf(const char *str, ...) {
 	int		ret;
 	t_flag	flag;
 	va_list	args;
 
 	ret = 0;
 	va_start (args, str);
-	while (*str)
-	{
+	while (*str) {
 		flag = ft_setzeroflag(flag);
-		if (*str == '%')
-		{
+		if (*str == '%') {
 			while (*++str == ' ' || *str == '-' || *str == '0'
 				|| *str == '+' || *str == '.' || *str == '#'
 				|| (*str >= '0' && *str <= '9'))

@@ -1,40 +1,48 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: audreyer <audreyer@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/07/10 01:52:00 by audreyer          #+#    #+#              #
+#    Updated: 2022/08/08 15:54:43 by audreyer         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+#
 
-NAME = push_swap.a
+NAME = libftprintf.a
 
 CC = gcc
 
-INCLUDES = ../include
-
-FLAGS = -Wall -Werror -Wextra -g3
+FLAG = -Wall -Werror -Wextra
 
 RM = rm -rf
 
+INC = ./include/ft_printf.h
+
 AR = ar rcs
 
-SRCS = aurele_sort_utils_2.c	\
-       aurele_sort_utils.c	\
-       ft_list.c	\
-       ft_lstinfo.c	\
-       push.c	\
-       push_swap.c	\
-       push_swap_utils.c	\
-       rotate2.c	\
-       rotate.c	\
-       swap.c
+FILE = ft_printf.c \
+	   ft_printf_utils1.c \
+	   ft_printf_utils2.c \
+	   ft_printf_utils3.c
 
+SRC = $(addprefix $(SRC_DIR),$(FILE))
 
-OUT = $(SRCS:.c=.o)
+OBJ = $(SRC:.c=.o)
 
-OUTB = $(SRCSB:.c=.o)
+SRC_DIR = src/
 
-$(NAME): $(OUT)
-		$(CC) $(FLAGS) -c $(SRCS) 
-		$(AR) $(NAME) $(OUT)
-		gcc -o push_swap push_swap.a
+OBJ_DIR = src/
 
-bonus: $(OUT) $(OUTB)
-		$(CC) $(FLAGS) -c $(SRCS) $(SRCSB)
-		$(AR) $(NAME) $(OUT) $(OUTB)
+OBJ = $(SRC:.c=.o)
+
+OUTB = $(SRCB:.c=.o)
+
+$(NAME):	$(OBJ) $(INC)
+		$(AR) $(NAME) $(OBJ)
+
 
 all: $(NAME)
 
@@ -46,4 +54,5 @@ fclean: clean
 
 re:		fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
+
