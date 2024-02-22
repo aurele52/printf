@@ -9,47 +9,47 @@
 #    Updated: 2022/08/08 15:54:43 by audreyer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-#
 
-NAME = libftprintf.a
+NAME = printf.a
 
 CC = gcc
 
-FLAG = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra -MMD
 
 RM = rm -rf
 
-INC = ./include/ft_printf.h
+INC = include/ft_printf.h
 
-AR = ar rcs
+-include ${DOBJ}
+
+.c.o:
+			$(CC) $(FLAGS) -I include -c $< -o $(<:.c=.o)
+
+AR = ar -crs
+
+SRC_DIR = src/
+SRC = $(addprefix $(SRC_DIR),$(FILE))
 
 FILE = ft_printf.c \
 	   ft_printf_utils1.c \
 	   ft_printf_utils2.c \
 	   ft_printf_utils3.c
 
-SRC = $(addprefix $(SRC_DIR),$(FILE))
-
 OBJ = $(SRC:.c=.o)
 
-SRC_DIR = src/
-
-OBJ = $(SRC:.c=.o)
+DOBJ		=	${SRC:.c=.d}
 
 $(NAME):	$(OBJ) $(INC)
-		$(CC) $(FLAG) -c $(SRC)
 		$(AR) $(NAME) $(OBJ)
-
 
 all: $(NAME)
 
 clean:
-		$(RM) $(OBJ)
+		${RM} $(OBJ) ${DOBJ} ${OBJB} ${DOBJB}
 
 fclean: clean
 		$(RM) $(NAME)
 
 re:		fclean all
 
-.PHONY: all clean fclean re
-
+.PHONY:		all clean fclean re .c.o
