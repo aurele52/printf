@@ -34,20 +34,17 @@ OBJ = $(SRC:.c=.o)
 
 SRC_DIR = src/
 
-OBJ_DIR = src/
-
 OBJ = $(SRC:.c=.o)
 
-OUTB = $(SRCB:.c=.o)
-
 $(NAME):	$(OBJ) $(INC)
+		$(CC) $(FLAG) -c $(SRC)
 		$(AR) $(NAME) $(OBJ)
 
 
 all: $(NAME)
 
 clean:
-		$(RM) $(OUT) $(OUTB)
+		$(RM) $(OBJ)
 
 fclean: clean
 		$(RM) $(NAME)
