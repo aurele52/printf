@@ -10,6 +10,19 @@
 #                                                                              #
 # **************************************************************************** #
 
+FILE = ft_printf.c \
+	   ft_printf_utils1.c \
+	   ft_printf_utils2.c \
+	   ft_printf_utils3.c
+
+SRC_DIR = src/
+
+SRC = $(addprefix $(SRC_DIR),$(FILE))
+
+OBJ = $(SRC:.c=.o)
+
+DOBJ		=	${SRC:.c=.d}
+
 NAME = printf.a
 
 CC = gcc
@@ -20,6 +33,8 @@ RM = rm -rf
 
 INC = include/ft_printf.h
 
+all: $(NAME)
+
 -include ${DOBJ}
 
 .c.o:
@@ -27,22 +42,9 @@ INC = include/ft_printf.h
 
 AR = ar -crs
 
-SRC_DIR = src/
-SRC = $(addprefix $(SRC_DIR),$(FILE))
-
-FILE = ft_printf.c \
-	   ft_printf_utils1.c \
-	   ft_printf_utils2.c \
-	   ft_printf_utils3.c
-
-OBJ = $(SRC:.c=.o)
-
-DOBJ		=	${SRC:.c=.d}
 
 $(NAME):	$(OBJ) $(INC)
 		$(AR) $(NAME) $(OBJ)
-
-all: $(NAME)
 
 clean:
 		${RM} $(OBJ) ${DOBJ} ${OBJB} ${DOBJB}
